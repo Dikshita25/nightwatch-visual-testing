@@ -44,7 +44,7 @@ exports.assertion = function compareScreenshot(
     const visualSettings = client.globals?.visual_regression_settings || defaultConfig;
     // Reference screenshots are saved in this directory
     // you absolutely should add this directory to version control.
-    const referenceDirectory = path.resolve(process.cwd(), visualSettings.outputDir, 'visual-reference');
+    const referenceDirectory = path.resolve(process.cwd(), visualSettings.outputDir || 'reports', 'visual-reference');
 
     let currentImage;
     let result;

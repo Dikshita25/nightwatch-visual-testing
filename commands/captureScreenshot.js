@@ -12,7 +12,7 @@ module.exports = class CaptureScreenshot {
   async command(name, cb) {
     try {
       const visualSettings = client.globals?.visual_regression_settings || defaultConfig;
-      const referenceDirectory = path.resolve(process.cwd(), visualSettings.outputDir, 'visual-reference');
+      const referenceDirectory = path.resolve(process.cwd(), visualSettings.outputDir || 'reports', 'visual-reference');
 
       const currentImage = imagePath({ base: currentDirectory, name });
       const referenceImage = imagePath({ base: referenceDirectory, name });

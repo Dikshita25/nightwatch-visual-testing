@@ -17,7 +17,7 @@ function createReport({
   referenceImage,
 }) {
   const visualSettings = client.globals?.visual_regression_settings || defaultConfig;
-  const reportsDirectory = path.resolve(process.cwd(), visualSettings.outputDir, `visual-regression`);
+  const reportsDirectory = path.resolve(process.cwd(), visualSettings.outputDir || 'reports', `visual-regression`);
 
   const reportCurrentImage = imagePath({ base: reportsDirectory, name, suffix: `-CURRENT` });
   const reportReferenceImage = imagePath({ base: reportsDirectory, name, suffix: `-REFERENCE` });
@@ -43,7 +43,7 @@ function createReport({
 function compare({ currentImage, name, referenceImage }) {
   return new Promise((resolve, reject) => {
     const visualSettings = client.globals?.visual_regression_settings || defaultConfig;
-    
+
     let img1;
     let img2;
     let imagesParsed = false;
