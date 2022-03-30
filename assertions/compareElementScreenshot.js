@@ -46,7 +46,7 @@ exports.assertion = function compareElementScreenshot() {
 
     const referenceImage = imagePath({ base: referenceDirectory, name });
 
-    this.api.captureElementScreenshot(using, element, name, (screenshotPath, errorMsg) => {
+    this.api.captureElementScreenshot(using, element, name, args.length, (screenshotPath, errorMsg) => {
       if (errorMsg) {
         error = errorMsg;
       };

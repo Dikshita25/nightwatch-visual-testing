@@ -27,7 +27,11 @@ const saveElementScreenshot = (using, element, path) => {
 };
 
 module.exports = class CaptureElementScreenshot {
-  async command(using, element, name = element, cb) {
+  async command(using, element, name = element, argsLength, cb) {
+    if (argsLength < 3) {
+      cb(null, 'Ensure you have passed mandatory params, with correct values in compareElementScreenshot method');
+      return;
+    }
     try {
       const visualSettings = browser.globals?.visual_regression_settings || defaultConfig;
       const referenceDirectory = path.resolve(process.cwd(), visualSettings.outputDir || 'reports', 'visual-reference');
@@ -47,7 +51,6 @@ module.exports = class CaptureElementScreenshot {
 
         console.info(`INFO: Element reference image successfully created: ${referenceImage}`);
       };
-
       // Saving the current image element screenshot.
       await saveElementScreenshot(using, element, currentImage);
       cb(currentImage);
