@@ -2,7 +2,6 @@ const { PNG } = require(`pngjs`);
 const fs = require(`fs`);
 const path = require(`path`);
 const pixelmatch = require(`pixelmatch`);
-const { client } = require('nightwatch-api');
 
 const defaultConfig = require('../defaultVisualConfig');
 
@@ -16,7 +15,7 @@ function createReport({
   name,
   referenceImage,
 }) {
-  const visualSettings = client.globals?.visual_regression_settings || defaultConfig;
+  const visualSettings = browser.globals?.visual_regression_settings || defaultConfig;
   const reportsDirectory = path.resolve(process.cwd(), visualSettings.outputDir || 'reports', `visual-regression`);
 
   const reportCurrentImage = imagePath({ base: reportsDirectory, name, suffix: `-CURRENT` });
@@ -42,7 +41,7 @@ function createReport({
 
 function compare({ currentImage, name, referenceImage }) {
   return new Promise((resolve, reject) => {
-    const visualSettings = client.globals?.visual_regression_settings || defaultConfig;
+    const visualSettings = browser.globals?.visual_regression_settings || defaultConfig;
 
     let img1;
     let img2;

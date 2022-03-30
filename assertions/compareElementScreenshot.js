@@ -9,7 +9,15 @@ const defaultConfig = require('../defaultVisualConfig');
  * @param {String} name name of the screenshot;
  * @param {String} message Optional message for `nightwatch` to log upon completion
  */
-exports.assertion = function compareScreenshot(name, message) {
+exports.assertion = function compareElementScreenshot() {
+  const args = [...arguments];
+
+  if (args.length === 3) {
+    args.unshift('css selector');
+  }
+
+  const [using, element, name = element, message] = args;
+
   this.message = message || `Visual regression test results for page <${name}>.`;
   this.expected = true
   this.errorMsg = '';
@@ -38,7 +46,7 @@ exports.assertion = function compareScreenshot(name, message) {
 
     const referenceImage = imagePath({ base: referenceDirectory, name });
 
-    this.api.captureScreenshot(name, (screenshotPath, errorMsg) => {
+    this.api.captureElementScreenshot(using, element, name, (screenshotPath, errorMsg) => {
       if (errorMsg) {
         error = errorMsg;
       };
