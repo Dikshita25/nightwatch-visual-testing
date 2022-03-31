@@ -1,6 +1,6 @@
 {
   "name": "nightwatch-visual-testing",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "description": "This package helps, performing visual testing using NightwatchJS",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
